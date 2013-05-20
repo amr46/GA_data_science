@@ -1,0 +1,15 @@
+Bayes Theorem for Standard Texas Holdem
+
+Preflop - 
+A big help
+Two cards present
+Based on the cards, can calculate number of 'GOOD' hands. 
+Eg. What is the chance I'll see 3 more spades given that I have 2 spades for a flush
+Eg. What is the chance that I my gutshot straight draw wil be successful?
+
+The Flop - 
+3 cards on the table. 
+The number of possibilities become smaller, but the chances of winning (or folding) become clearer. 
+Based on betting of other people, and the cards in hand, can make assumptions of what the other players have. 
+
+
