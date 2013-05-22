@@ -180,5 +180,5 @@ BayesClassifier(4321, 501, 1000)
 bayes_results <-  read.table('~/GA_data_science/homework1/hw1_bayes_results.txt')
 ggplot(bayes_results, aes(x=N, y=Error)) + geom_point() + geom_line()
 
-
+# The above plot shows us the bayes error changes with different N for cross validation 
 
