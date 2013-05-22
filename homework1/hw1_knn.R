@@ -20,17 +20,19 @@ KnnClassifier <- function(seed, test.start.index, test.end.index, max.k ){
 	#Compute the size of the training data set as a pct of the original
     train.1.pct = ((N-test.end.index+test.start.index-1)*100)/N
     
+    offset.range = test.start.index:test.end.index
     #Set the randomized indices of the test set
-	test.1.indices <- train.master[test.start.index:test.end.index]
+	test.1.indices <- train.master[offset.range]
+	train.1.indices <- train.master[-offset.range]
 	
 	#Extract the complement of the test indices from the data set and make that the training set	
-	train.1.data <- df[-test.1.indices, ]
+	train.1.data <- df[train.1.indices, ]
 	
 	#Extract the test data set
 	test.1.data <- df[test.1.indices, ]
 	
 	#Set up the output values of the train and test data sets
-	 train.1.labels <- as.factor(as.matrix(labels)[-test.1.indices, ]) 
+	 train.1.labels <- as.factor(as.matrix(labels)[train.1.indices, ]) 
 	 test.1.labels <- as.factor(as.matrix(labels)[test.1.indices, ]) 
 	  
 	 
@@ -75,11 +77,11 @@ KnnClassifier <- function(seed, test.start.index, test.end.index, max.k ){
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
 
 
-KnnClassifier(81, 1, 100, 100)
-KnnClassifier(81, 101, 200, 100)
-KnnClassifier(81, 201, 300, 100)
-KnnClassifier(81, 301, 400, 100)
-KnnClassifier(81, 401, 500, 100)
+KnnClassifier(81, 1, 200, 100)
+KnnClassifier(81, 201, 400, 100)
+KnnClassifier(81, 401, 600, 100)
+KnnClassifier(81, 601, 800, 100)
+KnnClassifier(81, 801, 1000, 100)
 
 
 
