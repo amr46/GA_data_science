@@ -76,12 +76,12 @@ KnnClassifier <- function(seed, test.start.index, test.end.index, max.k ){
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
 
-
-KnnClassifier(81, 1, 200, 100)
-KnnClassifier(81, 201, 400, 100)
-KnnClassifier(81, 401, 600, 100)
-KnnClassifier(81, 601, 800, 100)
-KnnClassifier(81, 801, 1000, 100)
+# 5 fold cross validation
+# KnnClassifier(81, 1, 200, 35) k = 12 err = 26%
+# KnnClassifier(81, 201, 400, 35)  k = 5 err = 23.5%
+# KnnClassifier(81, 401, 600, 35)  k = 11 err = 31.5%
+# KnnClassifier(81, 601, 800, 35)  k = 17 err = 21.5%
+# KnnClassifier(81, 801, 1000, 35) k = 8 err = 31.5%
 
 
 
