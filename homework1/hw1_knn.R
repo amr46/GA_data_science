@@ -1,25 +1,43 @@
 library(class)
 library(ggplot2)
 
-myKNNClassifier <- function(seed, start.index, end.index){
+KnnClassifier <- function(seed, test.start.index, test.end.index, max.k ){
+	 # Read data with heading row into data frame
 	df <- read.table('~/GA_data_science/homework1/hw1_data_w_labels.txt', header=TRUE)
-
+    
+    # Set the randomization seed 
 	set.seed(seed);
-
+    
+    # Set the number of rows in the data frame
 	N<-nrow(df);
+	
+	# Extract the classification column 
 	labels <- df$Classification
 
+    # generate a randomization of numbers from 1-1000, constant because of input seed
 	train.master <- sample(1:N, N, replace=F)
-    train.1.pct = ((N-end.index+start.index)*100)/N
-	test.1.indices <- train.master[start.index:end.index]
+	
+	#Compute the size of the training data set as a pct of the original
+    train.1.pct = ((N-test.end.index+test.start.index-1)*100)/N
+    
+    #Set the randomized indices of the test set
+	test.1.indices <- train.master[test.start.index:test.end.index]
+	
+	#Extract the complement of the test indices from the data set and make that the training set	
 	train.1.data <- df[-test.1.indices, ]
-	test.1.data <- df[test.1.indices,]
+	
+	#Extract the test data set
+	test.1.data <- df[test.1.indices, ]
+	
+	#Set up the output values of the train and test data sets
 	 train.1.labels <- as.factor(as.matrix(labels)[-test.1.indices, ]) 
 	 test.1.labels <- as.factor(as.matrix(labels)[test.1.indices, ]) 
-
-	 max.k <- 100
+	  
+	 
+    #Initialize the data frame for the error rates
     err.1.rates <- data.frame()
 
+   #Do knn!
 	for (k in 1:max.k) {
 		knn.1.fit <- knn(
       train = train.1.data,         # training set
@@ -53,7 +71,17 @@ myKNNClassifier <- function(seed, start.index, end.index){
 
 	results.1.plot
 }
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+
+
+KnnClassifier(81, 1, 100, 100)
+KnnClassifier(81, 101, 200, 100)
+KnnClassifier(81, 201, 300, 100)
+KnnClassifier(81, 301, 400, 100)
+KnnClassifier(81, 401, 500, 100)
+
+
 
 
 
