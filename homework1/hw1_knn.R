@@ -1,7 +1,7 @@
 library(class)
 library(ggplot2)
 
-KnnClassifier <- function(seed, test.start.index, test.end.index, max.k ){
+KnnClassifier <- function(seed, test.start.index, test.end.index, max.k, filename){
 	 # Read data with heading row into data frame
 	df <- read.table('~/GA_data_science/homework1/hw1_data_w_labels.txt', header=TRUE)
     
@@ -72,16 +72,17 @@ KnnClassifier <- function(seed, test.start.index, test.end.index, max.k ){
 	# draw results plot
 
 	results.1.plot
+	ggsave(filename)
 }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
 
 # 5 fold cross validation
-# KnnClassifier(81, 1, 200, 35) k = 12 err = 26%
-# KnnClassifier(81, 201, 400, 35)  k = 5 err = 23.5%
-# KnnClassifier(81, 401, 600, 35)  k = 11 err = 31.5%
-# KnnClassifier(81, 601, 800, 35)  k = 17 err = 21.5%
-# KnnClassifier(81, 801, 1000, 35) k = 8 err = 31.5%
+KnnClassifier(81, 1, 200, 35, 'knn_pass1.pdf') #k = 12 err = 26%
+KnnClassifier(81, 201, 400, 35, 'knn_pass2.pdf')  #k = 5 err = 23.5%
+KnnClassifier(81, 401, 600, 35, 'knn_pass3.pdf')  #k = 11 err = 31.5%
+KnnClassifier(81, 601, 800, 35, 'knn_pass4.pdf')  #k = 17 err = 21.5%
+KnnClassifier(81, 801, 1000, 35, 'knn_pas5.pdf') #k = 8 err = 31.5%
 
 
 
