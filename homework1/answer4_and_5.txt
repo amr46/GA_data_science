@@ -1,0 +1,49 @@
+Question:
+
+4) Detail your results for each model. Explain the strengths and weaknesses in each model.
+
+Answer:
+
+KNN using 5-fold cross validation
+
+KnnClassifier(81, 1, 200, 35, 'knn_pass1.pdf') #k = 12 err = 26%
+KnnClassifier(81, 201, 400, 35, 'knn_pass2.pdf')  #k = 5 err = 23.5%
+KnnClassifier(81, 401, 600, 35, 'knn_pass3.pdf')  #k = 11 err = 31.5%
+KnnClassifier(81, 601, 800, 35, 'knn_pass4.pdf')  #k = 17 err = 21.5%
+KnnClassifier(81, 801, 1000, 35, 'knn_pas5.pdf') #k = 8 err = 31.5%
+
+Best value of k = 17.
+Average misclassification error - 26.8%
+ 
+Graphs of each pass of knn - knn_pass[1-5].pdf
+
+Bayes:
+
+# Average error  2-fold cross validation = 31%
+# average error  3 Fold cross validation = 29.03%
+# Average error  5-fold cross validation = 27.2 %
+# Average error 10-fold cross validation = 27.8%
+
+The average error here was computed by averaging the number of misclassified test subject
+vs total test set size across all folds.
+
+Graph of average error vs N : bayes_results.pdf
+Strengths
+
+1) Error remains fairly consistent regardless of training set size
+2) Average error variance is less than KNN. 
+
+
+
+5) Report back the best error you find for each machine learning algorithm and accuracy rating.
+
+Best error for KNN was k=17 and average error = 26.8. Average accuracy - 74.2%
+Best error for Bayes was 27.2 average misclassification error. Average accuracy - 73.8%
+
+Some thoughts:
+
+1) From the patterns observed in the residuals1 and 2.pdf, the linear models have very distinct bands of errors
+   It's reasonable to assume that a datapoint in any of those bands would be a good candidate for classification 
+   according to its neighbors as there are so many 
+
+2) Bayes would also probabalistically classify elements in the same residuals band as the same. 

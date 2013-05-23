@@ -1,6 +1,88 @@
-Plots include:
+Question:
+2) Example plots that show correlation between values. Make sure you explain
+any significant correlations you find. This will show us you understand the
+data and investigated value.
 
-knn_pass1-5.pdf - 
+Answer:
 
-These files show the K-nearest neighbor for k values up to 35 (beyond which models started deteriorating in performance, and results were excluded)
+First, to analyze the data and look for correlations between independent variables and the classification value, we We construct a linear model.
+
+df <- read.table('~/GA_data_science/homework1/hw1_data_w_labels.txt', header=TRUE)
+fit.1 <- lm(Classification ~ . , data=df);
+summary(fit.1)
+
+From this output, it seems that the factors affecting the classification the most are, in descending order, 
+
+Status of existing checking account
+Duration in months (presumably of said checking account)
+Savings accounts bonds
+Work
+
+Included are two plots of Status of existing checking account (residuals1.pdf) and Job(residuals2.pdf).
+In both cases we observe that the data is highly randomized into clear bands, making this a good choice for a linear model (I think), and this verifies our linear model's low P values for these independent variables. 
+
+
+** Disclaimer - I have not had enough time to experiment with ggplot / linear models and come up with a 'great' graphical way of representing correlations between various data points and the output. 
+
+What I wanted to do was make a horizontal bar graph for each of discrete highly correlated variables above (like Existing checking account), and for each value this field (A1-A4), graph the number of Classification value (1 and 2) results. In essence this would construct a histogram showing how many good and bad credit classifications existed for each value of the independent variable A1-A4
+
+For the continuous variables, constructing a Bernouli curve to fit the would have been ideal.  
+
+
+--------------
+
+Plots for knn and bayes related questions are in subsequent answerX.txt files. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Call:
+lm(formula = Classification ~ ., data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.88989 -0.28516 -0.09095  0.34162  1.07086 
+
+Coefficients:
+                                                           Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                                               1.8791618  0.1666926  11.273  < 2e-16 ***
+Status_of_existing_checking_account                      -0.0953386  0.0108160  -8.815  < 2e-16 ***
+Duration_in_month                                         0.0062043  0.0014077   4.407 1.16e-05 ***
+Installment_rate_in_percentage_of_disposable_income      -0.0633754  0.0136176  -4.654 3.71e-06 ***
+Purpose                                                   0.0006210  0.0006276   0.989 0.322731    
+Savings_account_bonds                                    -0.0307410  0.0084621  -3.633 0.000295 ***
+Present_employment_since                                 -0.0242892  0.0119287  -2.036 0.042000 *  
+Personal_status_and_sex                                  -0.0346002  0.0183950  -1.881 0.060276 .  
+Present_residence_since                                   0.0008662  0.0129856   0.067 0.946828    
+Number_of_people_being_liable_to_provide_maintenance_for  0.0284970  0.0154365   1.846 0.065184 .  
+Other_debtors_guarantors                                 -0.0010066  0.0012939  -0.778 0.436779    
+Other_installment_plans                                  -0.0471549  0.0185202  -2.546 0.011045 *  
+Number_of_existing_credits_at_this_bank                   0.0406950  0.0251143   1.620 0.105472    
+Property                                                  0.0149896  0.0367443   0.408 0.683405    
+Telephone                                                -0.0445319  0.0295411  -1.507 0.132017    
+Credit_amount                                            -0.1628072  0.0700006  -2.326 0.020234 *  
+Job                                                       0.1083271  0.0315157   3.437 0.000613 ***
+Housing                                                  -0.1333354  0.0454448  -2.934 0.003425 ** 
+Credit_history                                            0.1679204  0.0593437   2.830 0.004756 ** 
+Other_debtors_guarantors.1                                0.2328766  0.0855349   2.723 0.006593 ** 
+foreign_worker                                            0.0624193  0.0580601   1.075 0.282605    
+Indicator_column1                                        -0.0167287  0.0511816  -0.327 0.743852    
+Indicator_column2                                        -0.1055434  0.0974869  -1.083 0.279235    
+Indicator_columns3                                       -0.0134231  0.0511531  -0.262 0.793060    
+Indicator_column4                                        -0.0018166  0.0414524  -0.044 0.965053    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4007 on 975 degrees of freedom
+Multiple R-squared:  0.2544,	Adjusted R-squared:  0.2361 
+F-statistic: 13.86 on 24 and 975 DF,  p-value: < 2.2e-16
 

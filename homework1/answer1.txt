@@ -10,6 +10,12 @@ These variables range in type from qualitative (Attribute 1 status of existing c
 
 We use K-Nearest Neighbor and Naive Bayes classification to build models to fit this data. 
 
+K-Nearest Neighbor is a simple classification algorithm that classifies a data point based on its k-nearest data points. K is varied to try to come up with the optimum K that minimizes classification error of the model. 
+
+Naive Bayes classifiers are probabalistic models that attempt to classify a data point assuming that all variables used for this classification are purely independent of each other. 
+
+We attempt to build models so as to minimize the overall classification error by these models. These frameworks are applicable to our data set because we are solving a classification problem - does an individual pose a good risk, or a bad risk. 
+
 The models will be trained on subsets of the data set ranging from 50-80% of the data. Then, the remainder of the data set will be used as a test set to see how well the model did. 
 
 Then different chunks of data will be chosen and new models built and scored against the complementary sets of data in a process known as N-fold cross validation. Here N represents the number of iterations of partitioning the master data set into training and test sets. 
