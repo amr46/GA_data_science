@@ -1,0 +1,26 @@
+List of files:
+answer1.txt, answer2.txt, answer3.txt, answer4_and_5.txt - answers to each of the 5 questions
+
+residuals1.pdf, residuals2.pdf - residual errors for linear model fits of Classification  (status of 
+                                 existing checking account) 
+
+residuals2.pdf - same as above but vs Job column.
+
+R files:
+hw1_knn.R - knn R code
+hw1_bayes.R - Bayes code
+correlations.R - scratch pad R file to generate pdfs for residuals plots above
+
+hw1_bayes_results.txt - text file used to generate R plot of average error vs N used for N-fold cross validation
+
+Plots:
+knn_pass[1-5].pdf - plots showing each fold of 5-fold cross validation error results. 
+bayes_results.pdf - average error vs N where N in {2,3,5,10} used in N-fold cross validation
+
+Modified data file:
+hw1_data_w_labels.txt - modified homework1.txt file to include column names. 
+
+
+
+ 
+ 

@@ -177,8 +177,9 @@ BayesClassifier(4321, 501, 1000)
 # Average error 2-fold cross validation = 31%
 # # # # # # # # # END 2-fold cross validation results # # # # # # # # # 
 
-bayes_results <-  read.table('~/GA_data_science/homework1/hw1_bayes_results.txt')
+bayes_results <-  read.table('~/GA_data_science/homework1/hw1_bayes_results.txt', header=TRUE)
 ggplot(bayes_results, aes(x=N, y=Error)) + geom_point() + geom_line()
+ggsave("bayes_results.pdf");
 
 # The above plot shows us the bayes error changes with different N for cross validation 
 

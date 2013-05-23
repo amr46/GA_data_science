@@ -40,6 +40,9 @@ Strengths
 Best error for KNN was k=17 and average error = 26.8. Average accuracy - 74.2%
 Best error for Bayes was 27.2 average misclassification error. Average accuracy - 73.8%
 
+Best model - KNN, but only by a little. 
+
+
 Some thoughts:
 
 1) From the patterns observed in the residuals1 and 2.pdf, the linear models have very distinct bands of errors
