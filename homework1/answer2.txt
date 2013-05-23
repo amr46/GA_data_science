@@ -1,0 +1,6 @@
+Plots include:
+
+knn_pass1-5.pdf - 
+
+These files show the K-nearest neighbor for k values up to 35 (beyond which models started deteriorating in performance, and results were excluded)
+
