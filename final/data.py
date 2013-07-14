@@ -4,7 +4,9 @@ import numpy as np
 from sklearn import svm, datasets
 from sklearn.metrics import confusion_matrix
 from sklearn.naive_bayes import GaussianNB
-
+from sklearn import tree
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 def create_csv(csvFileName, numRows):
     results = []
@@ -135,7 +137,22 @@ def create_data_and_outputs(input, dataIndices, resultIndex):
 
     return (data, values)
 
-def runGNB(train_data, test_data, dataIndices, resultindex):
+def runKNN(train_data, test_data, dataIndices, resultindex):
+    (train_data_points, train_target_points) = create_data_and_outputs(train_data, dataIndices ,resultIndex)
+    (test_data_points, test_target_points) = create_data_and_outputs(test_data, dataIndices, resultIndex)
+
+    knn = KNeighborsClassifier(n_neighbors=10)
+    knn_pred = knn.fit(train_data_points, train_target_points).predict(test_data_points)
+    error_matrix =  confusion_matrix(knn_pred, test_target_points)
+
+    total_correct = float(error_matrix[0][0] + error_matrix[1][1])
+    total_wrong = float(error_matrix[0][1] + error_matrix[1][0])
+
+    pct_accuracy = total_correct*100.0/(total_correct+total_wrong)
+    return pct_accuracy
+
+
+def runGNB(train_data, test_data, dataIndices, resultIndex):
     gnb = GaussianNB()
 
     (train_data_points, train_target_points) = create_data_and_outputs(train_data, dataIndices ,resultIndex)
@@ -151,7 +168,7 @@ def runGNB(train_data, test_data, dataIndices, resultindex):
     return pct_accuracy
     
 
-def runSVM(train_data, test_data, dataIndices, resultindex):
+def runSVM(train_data, test_data, dataIndices, resultIndex):
     (train_data_points, train_target_points) = create_data_and_outputs(train_data, dataIndices ,resultIndex)
 
     mysvm = svm.SVC().fit(train_data_points, train_target_points)
@@ -166,6 +183,24 @@ def runSVM(train_data, test_data, dataIndices, resultindex):
 
     pct_accuracy = total_correct*100.0/(total_correct+total_wrong)
     return pct_accuracy
+
+def runDT(train_data, test_data, dataIndices, resultIndex):
+    (train_data_points, train_target_points) = create_data_and_outputs(train_data, dataIndices ,resultIndex)
+
+    myDT = RandomForestClassifier(n_estimators=10)
+    myDT.fit(train_data_points, train_target_points)
+
+    (test_data_points, test_target_points) = create_data_and_outputs(test_data, dataIndices, resultIndex)
+
+    mysvm_pred = myDT.predict(test_data_points)
+    error_matrix =  confusion_matrix(mysvm_pred, test_target_points)
+
+    total_correct = float(error_matrix[0][0] + error_matrix[1][1])
+    total_wrong = float(error_matrix[0][1] + error_matrix[1][0])
+
+    pct_accuracy = total_correct*100.0/(total_correct+total_wrong)
+    return pct_accuracy
+
 
 train_data  = create_csv2('titanic_train.csv', -1)
 test_data   = create_csv2('titanic_test.csv', -1)
@@ -216,6 +251,55 @@ print "GNB Pct Accuracy (Sex) " + str(pct_acc)
 dataIndices = set([2,4,5,6,7,8,9,10,11])
 pct_acc = runGNB(train_data, test_data, dataIndices, resultIndex)
 print "GNB Pct Accuracy (All attributes) " + str(pct_acc)
+
+"""
+All Decision Tree Classifiers
+"""
+# Social Class, Sex And Age                                                                                                
+dataIndices = set([2,4,5])
+pct_acc = runDT(train_data, test_data, dataIndices, resultIndex)
+print "Decision Tree Pct Accuracy (Class, Sex and Age) " + str(pct_acc)
+
+# Sex and Age                                                                                                              
+dataIndices = set([4,5])
+pct_acc = runDT(train_data, test_data, dataIndices, resultIndex)
+print "Decision Tree Pct Accuracy (Sex and Age) " + str(pct_acc)
+
+# Sex                                                                                                                      
+dataIndices = set([4])
+pct_acc = runDT(train_data, test_data, dataIndices, resultIndex)
+print "Decision Tree Pct Accuracy (Sex) " + str(pct_acc)
+
+# All Attributes                                                                                                           
+dataIndices = set([2,4,5,6,7,8,9,10,11])
+pct_acc = runDT(train_data, test_data, dataIndices, resultIndex)
+print "Decision Tree Pct Accuracy (All Features) " + str(pct_acc)
+
+"""
+KNN Tests 
+"""
+# Social Class, Sex And Age
+
+#dataIndices = set([2,4,5])
+#pct_acc = runKNN(train_data, test_data, dataIndices, resultIndex)
+#print "Decision Tree Pct Accuracy (Class, Sex and Age) " + str(pct_acc)
+
+# Sex and Age
+
+#dataIndices = set([4,5])
+#pct_acc = runKNN(train_data, test_data, dataIndices, resultIndex)
+#print "Decision Tree Pct Accuracy (Sex and Age) " + str(pct_acc)
+
+# Sex
+
+#dataIndices = set([4])
+#pct_acc = runKNN(train_data, test_data, dataIndices, resultIndex)
+#print "Decision Tree Pct Accuracy (Sex) " + str(pct_acc)
+
+# All Attributes                                  
+dataIndices = set([2,4,5,6,7,8,9,10,11])
+pct_acc = runKNN(train_data, test_data, dataIndices, resultIndex)
+print "Decision Tree Pct Accuracy (All Features) " + str(pct_acc)
 
 # Create first round of parsed results
 # print results
